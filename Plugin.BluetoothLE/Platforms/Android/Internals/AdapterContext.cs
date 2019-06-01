@@ -64,6 +64,18 @@ namespace Plugin.BluetoothLE.Internals
             var builder = new ScanSettings.Builder();
             var scanMode = this.ToNative(config.ScanType);
             builder.SetScanMode(scanMode);
+            if (CrossBleAdapter.AndroidConfiguration.AdvancedScannerSettings)
+            {
+                if (config.MatchMode != null)
+                {
+                    builder.SetMatchMode(this.ToNative(config.MatchMode.Value));
+                }
+
+                if (config.NumOfMatches != null)
+                {
+                    builder.SetNumOfMatches((int)this.ToNative(config.NumOfMatches.Value));
+                }
+            }
 
             var scanFilters = new List<ScanFilter>();
             if (config.ServiceUuids != null && config.ServiceUuids.Count > 0)
@@ -152,6 +164,37 @@ namespace Plugin.BluetoothLE.Internals
 
                 default:
                     throw new ArgumentException("Invalid BleScanType");
+            }
+        }
+
+        protected virtual BluetoothScanMatchMode ToNative(BleMatchMode matchMode)
+        {
+            switch (matchMode)
+            {
+                case BleMatchMode.Aggressive:
+                    return BluetoothScanMatchMode.Aggressive;
+
+                case BleMatchMode.Sticky:
+                    return BluetoothScanMatchMode.Sticky;
+
+                default:
+                    throw new ArgumentException("Invalid BleMatchMode");
+            }
+        }
+
+        protected virtual BluetoothScanMatchNumber ToNative(BleNumOfMatches matchNumber)
+        {
+            switch (matchNumber)
+            {
+                case BleNumOfMatches.One:
+                    return BluetoothScanMatchNumber.OneAdvertisement;
+                case BleNumOfMatches.Few:
+                    return BluetoothScanMatchNumber.FewAdvertisement;
+                case BleNumOfMatches.Max:
+                    return BluetoothScanMatchNumber.MaxAdvertisement;
+
+                default:
+                    throw new ArgumentException("Invalid BleNumOfMatches");
             }
         }
     }

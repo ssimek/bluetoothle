@@ -41,6 +41,12 @@ namespace Plugin.BluetoothLE
 
 
         public bool UseNewScanner { get; set; }
+
+        /// <summary>
+        /// Whether the scanner supports advanced match filtering
+        /// </summary>
+        public bool AdvancedScannerSettings { get; internal set; }
+        
         public bool IsServerSupported { get; internal set; }
     }
 }

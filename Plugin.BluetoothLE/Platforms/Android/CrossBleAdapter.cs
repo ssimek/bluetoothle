@@ -22,6 +22,7 @@ namespace Plugin.BluetoothLE
 
             AndroidConfiguration.IsServerSupported = Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop;
             AndroidConfiguration.UseNewScanner =  Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop;
+            AndroidConfiguration.AdvancedScannerSettings = Build.VERSION.SdkInt >= BuildVersionCodes.M;
             AndroidConfiguration.ShouldInvokeOnMainThread = true;
         }
     }

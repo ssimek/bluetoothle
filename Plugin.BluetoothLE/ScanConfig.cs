@@ -10,6 +10,16 @@ namespace Plugin.BluetoothLE
         /// </summary>
         public BleScanType ScanType { get; set; } = BleScanType.Balanced;
 
+        /// <summary>
+        /// Match mode - supported only on android
+        /// </summary>
+        public BleMatchMode? MatchMode { get; set; }
+
+        /// <summary>
+        /// Number of matches - supported only on android
+        /// </summary>
+        public BleNumOfMatches? NumOfMatches { get; set; }
+
 
         /// <summary>
         /// Allows the use of Scan Batching, if supported by the underlying provider
