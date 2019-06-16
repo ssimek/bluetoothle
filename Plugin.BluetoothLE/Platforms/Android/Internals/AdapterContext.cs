@@ -47,7 +47,9 @@ namespace Plugin.BluetoothLE.Internals
 
             if (this.oldCallbacks != null)
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 this.manager.Adapter.StopLeScan(this.oldCallbacks);
+#pragma warning restore CS0618 // Type or member is obsolete
                 this.oldCallbacks = null;
             }
         }
@@ -114,9 +116,11 @@ namespace Plugin.BluetoothLE.Internals
                     ob.OnNext(scanResult);
                 }
             });
+#pragma warning disable CS0618 // Type or member is obsolete
             this.manager.Adapter.StartLeScan(this.oldCallbacks);
 
             return () => this.manager.Adapter.StopLeScan(this.oldCallbacks);
+#pragma warning restore CS0618 // Type or member is obsolete
         });
 
 
